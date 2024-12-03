@@ -1,0 +1,29 @@
+plugins {
+    id 'java'
+    id "org.flywaydb.flyway" version "11.0.0"
+}
+
+group = 'com.example'
+version = '1.0-SNAPSHOT'
+sourceCompatibility = '17'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'mysql:mysql-connector-java:8.0.33'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+}
+
+flyway {
+    url = "${System.getenv('MYSQL_HOST')}/${System.getenv('MYSQL_DATABASE')}"
+    user = System.getenv('MYSQL_USER')
+    password = System.getenv('MYSQL_PASSWORD')
+    locations = ['filesystem:src/main/resources/db/migration']
+}
+
+test {
+    useJUnitPlatform()
+}
