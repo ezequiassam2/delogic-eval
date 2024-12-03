@@ -39,9 +39,9 @@ CREATE TABLE Categories (
 CREATE TABLE Dates (
     date_id BIGINT PRIMARY KEY,
     calendar_date DATE,
-    day INT,
+    day VARCHAR(2),
     week INT,
-    month INT,
+    month VARCHAR(3),
     quarter INT,
     year INT,
     holiday_flag BOOLEAN
@@ -53,7 +53,7 @@ CREATE TABLE Events (
     category_id BIGINT,
     date_id BIGINT,
     event_name VARCHAR(255) NOT NULL,
-    event_start_time TIME,
+    event_start_time TIMESTAMP,
     FOREIGN KEY (venue_id) REFERENCES Venues(venue_id),
     FOREIGN KEY (category_id) REFERENCES Categories(category_id),
     FOREIGN KEY (date_id) REFERENCES Dates(date_id)
