@@ -9,10 +9,12 @@ buildscript {
 
 plugins {
     id 'java'
+    id 'org.springframework.boot' version "$springVersion"
+    id 'io.spring.dependency-management' version "$springManagerVersion"
     id "org.flywaydb.flyway" version "$flywayVersion"
 }
 
-group = 'delogic'
+group = 'com.delogic'
 version = '1.0-SNAPSHOT'
 java.sourceCompatibility = JavaVersion.VERSION_17
 
@@ -22,8 +24,10 @@ repositories {
 
 dependencies {
     implementation "mysql:mysql-connector-java:$mysqlConnectorVersion"
-    testImplementation "org.junit.jupiter:junit-jupiter-api:$jupiterVersion"
-    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:$jupiterVersion"
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
 
 
