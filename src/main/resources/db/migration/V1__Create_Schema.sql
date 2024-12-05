@@ -39,11 +39,11 @@ CREATE TABLE Categories (
 CREATE TABLE Dates (
     date_id BIGINT PRIMARY KEY,
     calendar_date DATE,
-    day VARCHAR(2),
-    week INT,
-    month VARCHAR(3),
-    quarter INT,
-    year INT,
+    `day` VARCHAR(2),
+    `week` INT,
+    `month` VARCHAR(3),
+    `quarter` INT,
+    `year` INT,
     holiday_flag BOOLEAN
 );
 
