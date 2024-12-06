@@ -54,9 +54,9 @@ CREATE TABLE events (
     date_id BIGINT,
     event_name VARCHAR(255) NOT NULL,
     event_start_time TIMESTAMP,
-    FOREIGN KEY (venue_id) REFERENCES Venues(venue_id),
-    FOREIGN KEY (category_id) REFERENCES Categories(category_id),
-    FOREIGN KEY (date_id) REFERENCES Dates(date_id)
+    FOREIGN KEY (venue_id) REFERENCES venues(venue_id),
+    FOREIGN KEY (category_id) REFERENCES categories(category_id),
+    FOREIGN KEY (date_id) REFERENCES dates(date_id)
 );
 
 CREATE TABLE listings (
@@ -68,9 +68,9 @@ CREATE TABLE listings (
     price_per_ticket DECIMAL(10, 2),
     total_price DECIMAL(10, 2),
     listing_timestamp TIMESTAMP,
-    FOREIGN KEY (seller_id) REFERENCES Users(user_id),
-    FOREIGN KEY (event_id) REFERENCES Events(event_id),
-    FOREIGN KEY (date_id) REFERENCES Dates(date_id)
+    FOREIGN KEY (seller_id) REFERENCES users(user_id),
+    FOREIGN KEY (event_id) REFERENCES events(event_id),
+    FOREIGN KEY (date_id) REFERENCES dates(date_id)
 );
 
 CREATE TABLE sales (
@@ -84,9 +84,9 @@ CREATE TABLE sales (
     price_paid DECIMAL(10, 2),
     commission_amount DECIMAL(10, 2),
     sale_timestamp TIMESTAMP,
-    FOREIGN KEY (listing_id) REFERENCES Listings(listing_id),
-    FOREIGN KEY (seller_id) REFERENCES Users(user_id),
-    FOREIGN KEY (buyer_id) REFERENCES Users(user_id),
-    FOREIGN KEY (event_id) REFERENCES Events(event_id),
-    FOREIGN KEY (date_id) REFERENCES Dates(date_id)
+    FOREIGN KEY (listing_id) REFERENCES listings(listing_id),
+    FOREIGN KEY (seller_id) REFERENCES users(user_id),
+    FOREIGN KEY (buyer_id) REFERENCES users(user_id),
+    FOREIGN KEY (event_id) REFERENCES events(event_id),
+    FOREIGN KEY (date_id) REFERENCES dates(date_id)
 );
