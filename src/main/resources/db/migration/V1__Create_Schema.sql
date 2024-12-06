@@ -1,6 +1,6 @@
 -- V1__Create_Schema.sql
 
-CREATE TABLE Users (
+CREATE TABLE users (
     user_id BIGINT PRIMARY KEY,
     username VARCHAR(255) NOT NULL,
     first_name VARCHAR(255),
@@ -21,7 +21,7 @@ CREATE TABLE Users (
     musicals BOOLEAN
 );
 
-CREATE TABLE Venues (
+CREATE TABLE venues (
     venue_id BIGINT PRIMARY KEY,
     venue_name VARCHAR(255) NOT NULL,
     city VARCHAR(255),
@@ -29,14 +29,14 @@ CREATE TABLE Venues (
     seating_capacity INT
 );
 
-CREATE TABLE Categories (
+CREATE TABLE categories (
     category_id BIGINT PRIMARY KEY,
     category_group VARCHAR(255),
     category_name VARCHAR(255) NOT NULL,
     category_description TEXT
 );
 
-CREATE TABLE Dates (
+CREATE TABLE dates (
     date_id BIGINT PRIMARY KEY,
     calendar_date DATE,
     `day` VARCHAR(2),
@@ -47,7 +47,7 @@ CREATE TABLE Dates (
     holiday_flag BOOLEAN
 );
 
-CREATE TABLE Events (
+CREATE TABLE events (
     event_id BIGINT PRIMARY KEY,
     venue_id BIGINT,
     category_id BIGINT,
@@ -59,7 +59,7 @@ CREATE TABLE Events (
     FOREIGN KEY (date_id) REFERENCES Dates(date_id)
 );
 
-CREATE TABLE Listings (
+CREATE TABLE listings (
     listing_id BIGINT PRIMARY KEY,
     seller_id BIGINT,
     event_id BIGINT,
@@ -73,7 +73,7 @@ CREATE TABLE Listings (
     FOREIGN KEY (date_id) REFERENCES Dates(date_id)
 );
 
-CREATE TABLE Sales (
+CREATE TABLE sales (
     sale_id BIGINT PRIMARY KEY,
     listing_id BIGINT,
     seller_id BIGINT,
