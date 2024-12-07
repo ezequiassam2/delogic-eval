@@ -26,13 +26,13 @@ public abstract class BaseService<T, D> {
         }
     }
 
-    public List<Long> getAllIds(int page, int size) {
+    protected List<Long> getAllIds(int page, int size) {
         Pageable pageable = PageRequest.of(page, size);
         Page<Long> idsPage = repository.findAllIds(pageable);
         return idsPage.getContent();
     }
 
-    public List<String> getAllIdsUrls(int page, int size) {
+    protected List<String> getAllIdsUrls(int page, int size) {
         Pageable pageable = PageRequest.of(page, size);
         Page<Long> idsPage = repository.findAllIds(pageable);
         return idsPage.getContent().stream()

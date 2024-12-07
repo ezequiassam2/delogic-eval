@@ -27,7 +27,7 @@ public class EventMapperImpl implements EventMapper {
         return EventDTO.builder()
                 .id(event.getId())
                 .name(event.getName())
-                .startTime(event.getStartTime())
+                .startTime(event.getStartTime().toLocalDateTime())
                 .venue(venueMapper.toDTO(event.getVenue()))
                 .category(categoryMapper.toDTO(event.getCategory()))
                 .date(dateMapper.toDTO(event.getDate()))

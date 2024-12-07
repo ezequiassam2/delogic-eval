@@ -13,7 +13,7 @@ public class ListingDTO {
     private Integer numberOfTickets;
     private BigDecimal pricePerTicket;
     private BigDecimal totalPrice;
-    private Timestamp timestamp;
+    private java.time.LocalDateTime timestamp;
     private UserDTO seller;
     private EventDTO event;
     private DateDTO date;

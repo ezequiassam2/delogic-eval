@@ -8,7 +8,7 @@ import lombok.Data;
 public class EventDTO {
     private Long id;
     private String name;
-    private java.sql.Timestamp startTime;
+    private java.time.LocalDateTime startTime;
     private VenueDTO venue;
     private CategoryDTO category;
     private DateDTO date;

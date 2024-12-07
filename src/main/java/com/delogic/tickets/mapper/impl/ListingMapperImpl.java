@@ -32,7 +32,7 @@ public class ListingMapperImpl implements ListingMapper {
                 .numberOfTickets(listing.getNumberOfTickets())
                 .pricePerTicket(listing.getPricePerTicket())
                 .totalPrice(listing.getTotalPrice())
-                .timestamp(listing.getTimestamp())
+                .timestamp(listing.getTimestamp().toLocalDateTime())
                 .build();
     }
 }

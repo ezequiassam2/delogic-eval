@@ -7,7 +7,7 @@ import lombok.Data;
 @Builder
 public class DateDTO {
     private Long id;
-    private java.sql.Date calendarDate;
+    private java.time.LocalDate calendarDate;
     private String day;
     private Integer week;
     private String month;

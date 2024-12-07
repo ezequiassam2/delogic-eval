@@ -36,7 +36,7 @@ public class SaleMapperImpl implements SaleMapper {
                 .quantitySold(sale.getQuantitySold())
                 .pricePaid(sale.getPricePaid())
                 .commissionAmount(sale.getCommissionAmount())
-                .timestamp(sale.getTimestamp())
+                .timestamp(sale.getTimestamp().toLocalDateTime())
                 .build();
     }
 }

@@ -13,7 +13,7 @@ public class SaleDTO {
     private Integer quantitySold;
     private BigDecimal pricePaid;
     private BigDecimal commissionAmount;
-    private Timestamp timestamp;
+    private java.time.LocalDateTime timestamp;
     private ListingDTO listing;
     private UserDTO seller;
     private UserDTO buyer;

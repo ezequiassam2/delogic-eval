@@ -13,7 +13,7 @@ public class DateMapperImpl implements DateMapper {
         }
         return DateDTO.builder()
                 .id(date.getId())
-                .calendarDate(date.getCalendarDate())
+                .calendarDate(date.getCalendarDate().toLocalDate())
                 .day(date.getDay())
                 .week(date.getWeek())
                 .month(date.getMonth())
