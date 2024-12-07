@@ -1,9 +1,18 @@
-FROM amazoncorretto:17-alpine-jdk
+FROM gradle:8.11.1-jdk17 AS build
 
 WORKDIR /app
 
-COPY build/libs/delogic-eval.jar /app/delogic-eval.jar
+COPY build.gradle settings.gradle gradle.properties ./
+COPY src ./src
+
+RUN gradle build --no-daemon
+
+FROM amazoncorretto:17
+
+WORKDIR /app
+
+COPY --from=build /app/build/libs/*.jar app.jar
 
 EXPOSE 8080
 
-CMD ["java", "-jar", "delogic-eval.jar"]
+ENTRYPOINT ["java", "-jar", "app.jar"]
