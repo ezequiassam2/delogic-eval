@@ -249,6 +249,27 @@ GET /listings/{id}
 }
 ```
 
+### Get Promotional Listings
+
+**Request:**
+```
+GET /listings/promotional
+```
+**Parameters:**
+- `contextDate` (required, format: `yyyy-MM-dd HH:mm:ss`)
+- `categoryId` (optional)
+- `city` (optional)
+- `includeUrls` (optional, default: `false`)
+
+**Response:**
+```json
+[
+    1,
+    2,
+    3
+]
+```
+
 ## Sale API
 
 ### Get All Sale IDs
