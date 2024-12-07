@@ -1,0 +1,51 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath "org.flywaydb:flyway-mysql:$flywayVersion"
+    }
+}
+
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version "$springVersion"
+    id 'io.spring.dependency-management' version "$springManagerVersion"
+    id "org.flywaydb.flyway" version "$flywayVersion"
+}
+
+group = 'com.delogic.tickets'
+version = '1.0-SNAPSHOT'
+java.sourceCompatibility = JavaVersion.VERSION_17
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation "mysql:mysql-connector-java:$mysqlConnectorVersion"
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    testImplementation 'com.h2database:h2'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+
+flyway {
+    url = "${System.getenv('MYSQL_HOST')}/${System.getenv('MYSQL_DATABASE')}"
+    user = System.getenv('MYSQL_ROOT_USER')
+    password = System.getenv('MYSQL_ROOT_PASSWORD')
+    locations = ['filesystem:src/main/resources/db/migration']
+}
+
+test {
+    useJUnitPlatform()
+    testLogging {
+        events "passed", "skipped", "failed"
+    }
+    systemProperty 'spring.profiles.active', 'test'
+}
