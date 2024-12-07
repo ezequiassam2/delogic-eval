@@ -24,6 +24,9 @@ public class Event {
     @JoinColumn(name = "date_id")
     private Date date;
 
+    @Column(name = "event_name")
     private String name;
+
+    @Column(name = "event_start_time")
     private java.sql.Timestamp startTime;
 }

@@ -14,6 +14,7 @@ public class Venue {
 
     @Column(name = "venue_name")
     private String name;
+
     private String city;
     private String state;
     private Integer seatingCapacity;

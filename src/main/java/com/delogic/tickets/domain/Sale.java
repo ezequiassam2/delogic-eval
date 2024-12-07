@@ -32,9 +32,10 @@ public class Sale {
     @JoinColumn(name = "date_id")
     private Date date;
 
+    @Column(name = "sale_timestamp")
+    private java.sql.Timestamp timestamp;
+
     private Integer quantitySold;
     private java.math.BigDecimal pricePaid;
     private java.math.BigDecimal commissionAmount;
-    @Column(name = "sale_timestamp")
-    private java.sql.Timestamp timestamp;
 }
