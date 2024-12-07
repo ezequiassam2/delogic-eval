@@ -13,6 +13,7 @@
    ```
 
 2. **Export Environment Variables**
+   - Rename file template.env to .env
    - Run the following command to export the environment variables:
      ```sh
      export $(cat .env | xargs)
@@ -51,6 +52,16 @@
      USE ${MYSQL_DATABASE};
      SHOW TABLES;
      ```
+
+7. **Start the Application**
+   - Run the following command to start the application container:
+     ```sh
+     docker-compose up -d app
+     ```  
+
+8. **Verify the Application**
+ - Open your browser and navigate to http://localhost:8080 to verify that the application is running.
+ - Please refer to the API \`DOCS_API.md\` to use the application.
 
 ## Notes
 - This guide is for running the migration locally. Password configurations should be stored securely.
