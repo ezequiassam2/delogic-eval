@@ -2,9 +2,7 @@ package com.delogic.tickets.service;
 
 import com.delogic.tickets.repository.BaseRepository;
 import com.delogic.tickets.util.UrlBuilder;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 import java.util.Optional;
@@ -27,16 +25,16 @@ public abstract class BaseService<T, D> {
     }
 
     protected List<Long> getAllIds(int page, int size) {
-        Pageable pageable = PageRequest.of(page, size);
-        Page<Long> idsPage = repository.findAllIds(pageable);
+        var pageable = PageRequest.of(page, size);
+        var idsPage = repository.findAllIds(pageable);
         return idsPage.getContent();
     }
 
     protected List<String> getAllIdsUrls(int page, int size) {
-        Pageable pageable = PageRequest.of(page, size);
-        Page<Long> idsPage = repository.findAllIds(pageable);
+        var pageable = PageRequest.of(page, size);
+        var idsPage = repository.findAllIds(pageable);
         return idsPage.getContent().stream()
-                .map(id -> UrlBuilder.buildUrl(id))
+                .map(UrlBuilder::buildUrl)
                 .collect(Collectors.toList());
     }
 

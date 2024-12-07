@@ -15,6 +15,8 @@ import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
+import java.time.LocalDateTime;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -83,6 +85,46 @@ public class ListingServiceTest {
         List<?> result = listingService.getAllIdsOrUrls(0, 10, true);
 
         assertThat(result).isEqualTo(urls);
+        RequestContextHolder.resetRequestAttributes();
+    }
+
+    @Test
+    public void testGetPromotionalListings_Success() {
+        LocalDateTime contextDate = LocalDateTime.of(2023, 10, 10, 20, 0, 0);
+        List<Long> listingIds = Collections.singletonList(1L);
+        when(listingRepository.findUnsoldListings(contextDate, null, null)).thenReturn(listingIds);
+
+        List<?> result = listingService.getPromotionalListings(contextDate, null, null, false);
+
+        assertThat(result).isEqualTo(listingIds);
+    }
+
+    @Test
+    public void testGetPromotionalListings_WithCategoryAndCity() {
+        LocalDateTime contextDate = LocalDateTime.of(2023, 10, 10, 20, 0, 0);
+        Long categoryId = 1L;
+        String city = "New York";
+        List<Long> listingIds = Collections.singletonList(1L);
+        when(listingRepository.findUnsoldListings(contextDate, categoryId, city)).thenReturn(listingIds);
+
+        List<?> result = listingService.getPromotionalListings(contextDate, categoryId, city, false);
+
+        assertThat(result).isEqualTo(listingIds);
+    }
+
+    @Test
+    public void testGetPromotionalListings_IncludeUrls() {
+        MockHttpServletRequest request = new MockHttpServletRequest();
+        request.setRequestURI("/api/listings");
+        RequestContextHolder.setRequestAttributes(new ServletRequestAttributes(request));
+
+        LocalDateTime contextDate = LocalDateTime.of(2023, 10, 10, 20, 0, 0);
+        List<Long> listingIds = Collections.singletonList(1L);
+        when(listingRepository.findUnsoldListings(contextDate, null, null)).thenReturn(listingIds);
+
+        List<?> result = listingService.getPromotionalListings(contextDate, null, null, true);
+
+        assertThat(result).isEqualTo(listingIds.stream().map(id -> "http://localhost/api/listings/" + id).collect(Collectors.toList()));
         RequestContextHolder.resetRequestAttributes();
     }
 }

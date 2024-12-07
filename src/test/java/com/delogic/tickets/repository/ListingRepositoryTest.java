@@ -9,6 +9,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -45,5 +47,25 @@ public class ListingRepositoryTest {
 
         assertThat(idsPage).isNotNull();
         assertThat(idsPage.getContent()).containsExactlyInAnyOrder(listing1.getId(), listing2.getId());
+    }
+
+    @Test
+    public void testFindUnsoldListings_Success() {
+        LocalDateTime contextDate = LocalDateTime.of(2023, 10, 10, 20, 0, 0);
+        List<Long> listingIds = listingRepository.findUnsoldListings(contextDate, null, null);
+
+        assertThat(listingIds).isNotNull();
+        assertThat(listingIds.size()).isLessThanOrEqualTo(10);
+    }
+
+    @Test
+    public void testFindUnsoldListings_WithCategoryAndCity() {
+        LocalDateTime contextDate = LocalDateTime.of(2023, 10, 10, 20, 0, 0);
+        Long categoryId = 1L;
+        String city = "New York";
+        List<Long> listingIds = listingRepository.findUnsoldListings(contextDate, categoryId, city);
+
+        assertThat(listingIds).isNotNull();
+        assertThat(listingIds.size()).isLessThanOrEqualTo(10);
     }
 }
